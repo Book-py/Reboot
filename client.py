@@ -8,11 +8,9 @@ def receive():
     while True:
         try:
             msg = client_socket.recv(BUFSIZ).decode("utf8")
-            msg.replace(r"\n", "\n")
-            for line in msg.split("\n"):
 
+            for line in msg.split("\n"):
                 for line2 in line.split("\\n"):
-                    print(line2)
                     msg_list.insert(tkinter.END, line2)
 
         except OSError:  # Possibly client has left the chat.
