@@ -4,7 +4,7 @@ from threading import Thread
 clients = {}
 addresses = {}
 
-HOST = ""
+HOST = ""  # 192.168.0.21
 PORT = 33000
 BUFSIZ = 1024
 ADDR = (HOST, PORT)
@@ -19,7 +19,7 @@ def accept_incoming_connections():
         print("%s:%s has connected." % client_address)
         client.send(
             bytes(
-                "Greetings from the cave!" + "Now type your name and press enter!",
+                "Greetings from the cave!\nNow type your name and press enter!",
                 "utf8",
             )
         )
@@ -30,7 +30,7 @@ def accept_incoming_connections():
 def handle_client(client):  # Takes client socket as argument.
     """Handles a single client connection."""
     name = client.recv(BUFSIZ).decode("utf8")
-    welcome = "Welcome %s! If you ever want to quit, type {quit} to exit." % name
+    welcome = "Welcome %s! \nIf you ever want to quit, type {quit} to exit." % name
     client.send(bytes(welcome, "utf8"))
     msg = "%s has joined the chat!" % name
     broadcast(bytes(msg, "utf8"))
